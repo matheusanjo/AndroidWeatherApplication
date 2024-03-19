@@ -15,9 +15,7 @@ Como Usar
 
     Clone o repositório:
 
-bash
-
-git clone https://github.com/matheusanjo/AndroidWeatherApplication
+bash git clone https://github.com/matheusanjo/AndroidWeatherApplication
 
     Abra o projeto no Android Studio.
     Execute o aplicativo em um emulador ou dispositivo Android.
