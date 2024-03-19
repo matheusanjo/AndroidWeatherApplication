@@ -13,9 +13,7 @@ Screenshots
     
 Como Usar
 
-    Clone o repositório:
-
-bash git clone https://github.com/matheusanjo/AndroidWeatherApplication
+    Clone o repositório: git clone https://github.com/matheusanjo/AndroidWeatherApplication
 
     Abra o projeto no Android Studio.
     Execute o aplicativo em um emulador ou dispositivo Android.
