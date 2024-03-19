@@ -17,7 +17,7 @@ Como Usar
 
 bash
 
-git clone https://github.com/matheusanjo/WeatherApp.git
+git clone https://github.com/matheusanjo/AndroidWeatherApplication
 
     Abra o projeto no Android Studio.
     Execute o aplicativo em um emulador ou dispositivo Android.
@@ -34,7 +34,7 @@ Tecnologias Utilizadas
 
 API Utilizada
 
-O aplicativo utiliza a API OpenWeatherMap para obter os dados de previsão do tempo.
+O aplicativo utiliza a API WeatherAPI para obter os dados de previsão do tempo.
 Contribuindo
 
 Contribuições são bem-vindas! Sinta-se à vontade para abrir uma issue ou enviar um pull request.
