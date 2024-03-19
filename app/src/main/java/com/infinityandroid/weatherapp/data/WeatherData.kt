@@ -11,7 +11,7 @@ data class CurrentLocation(
     val location: String = "Choose your location",
     val latitude: Double? = null,
     val longitude: Double? = null
-): WeatherData()
+) : WeatherData()
 
 data class CurrentWeather(
     val icon: String,
@@ -19,7 +19,14 @@ data class CurrentWeather(
     val wind: Float,
     val humidity: Int,
     val chanceOfRain: Int
-): WeatherData()
+) : WeatherData()
+
+data class Forecast(
+    val time: String,
+    val temperature: Float,
+    val feelsLikeTemperature: Float,
+    val icon: String
+) : WeatherData()
 
 private fun getCurrentDate(): String {
     val currentDate = Date()
