@@ -6,9 +6,12 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.infinityandroid.weatherapp.data.CurrentLocation
 import com.infinityandroid.weatherapp.data.CurrentWeather
+import com.infinityandroid.weatherapp.data.Forecast
 import com.infinityandroid.weatherapp.data.WeatherData
+import com.infinityandroid.weatherapp.databinding.FragmentHomeBinding
 import com.infinityandroid.weatherapp.databinding.ItemContainerCurrentLocationBinding
 import com.infinityandroid.weatherapp.databinding.ItemContainerCurrentWeatherBinding
+import com.infinityandroid.weatherapp.databinding.ItemContainerForecastBinding
 
 class WeatherDataAdapter(
     private val onLocationClicked: () -> Unit
@@ -42,10 +45,25 @@ class WeatherDataAdapter(
         }
     }
 
+    fun setForecastData(forecast: List<Forecast>) {
+        weatherData.removeAll { it is Forecast }
+        notifyItemRangeRemoved(INDEX_FORECAST, weatherData.size)
+        weatherData.addAll(INDEX_FORECAST, forecast)
+        notifyItemChanged(INDEX_FORECAST, weatherData.size)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             INDEX_CURRENT_LOCATION -> CurrentLocationViewHolder(
                 ItemContainerCurrentLocationBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+
+            INDEX_FORECAST -> ForecastViewHolder(
+                ItemContainerForecastBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
@@ -66,6 +84,7 @@ class WeatherDataAdapter(
         when(holder) {
             is CurrentLocationViewHolder -> holder.bind(weatherData[position] as CurrentLocation)
             is CurrentWeatherViewHolder -> holder.bind(weatherData[position] as CurrentWeather)
+            is ForecastViewHolder -> holder.bind(weatherData[position] as Forecast)
         }
     }
 
@@ -77,6 +96,7 @@ class WeatherDataAdapter(
         return when (weatherData[position]) {
             is CurrentLocation -> INDEX_CURRENT_LOCATION
             is CurrentWeather -> INDEX_CURRENT_WEATHER
+            is Forecast -> INDEX_FORECAST
         }
     }
 
@@ -103,6 +123,21 @@ class WeatherDataAdapter(
                 textWind.text = String.format("%.1f km/h", currentWeather.wind)
                 textHumidity.text = String.format("%s%%", currentWeather.humidity)
                 textChanceOfRain.text = String.format("%s%%", currentWeather.chanceOfRain)
+            }
+        }
+    }
+
+    inner class ForecastViewHolder(
+        private val binding: ItemContainerForecastBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(forecast: Forecast) {
+            with(binding) {
+                textTime.text = forecast.time
+                //textTemperature.text = String.format("%s\u00B0C", forecast.temperature)
+                //textFeelsLikeTemperature.text =
+                    String.format("%s\u00B0C", forecast.feelsLikeTemperature)
+                imageIcon.load("https${forecast.icon}"){ crossfade(true) }
+
             }
         }
     }
